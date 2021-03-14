@@ -327,14 +327,7 @@ class DiscordAdapter extends EventEmitter {
       },
     });
 
-    if (user) {
-      // Update the guild member's nickname to match their given name.
-      try {
-        await guildMember.setNickname(user.name);
-      } catch (err) {
-        this.logError(`An error occured while setting the nickname for ${user.name}: ${err}`);
-      }
-    } else {
+    if (!user) {
       this.logWarning(`${guildMember} fue añadido al servidor pero no está en la BBDD de verificación.`);
     }
   }
@@ -344,7 +337,7 @@ class DiscordAdapter extends EventEmitter {
    * @param {Discord.GuildMember} guildMember
    */
   async onGuildMemberRemove(guildMember) {
-    this.logInfo(`${guildMember} was removed from the server.`);
+    this.logInfo(`${guildMember} fue removido del servidor (o se salió).`);
 
     const user = await User.findOne({
       where: {
@@ -515,23 +508,22 @@ class DiscordAdapter extends EventEmitter {
     if (guildMember) {
       this.logInfo(`El usuario ${guildMember.user.tag} ya es miembro del servidor.`);
       // Just update the nickname.
-      this.setNickname(userResolvable, nick);
+      // this.setNickname(userResolvable, nick);
     } else {
       // Discord user not a member of the guild yet.
       const discordUser = await this.resolveUser(userResolvable);
       if (!discordUser) {
-        throw new Error(`User with id ${userResolvable.id || userResolvable} was not found.`);
+        throw new Error(`El usuario con id ${userResolvable.id || userResolvable} no fue encontrado.`);
       }
 
       // Add the member and set the nickname.
       try {
         guildMember = await guild.addMember(discordUser, {
           accessToken,
-          nick,
           roles: [defaultRole.id],
         });
       } catch (err) {
-        this.logError(`DiscordAdapter.addUser: Could not add ${nick} to the server: ${err}`);
+        this.logError(`DiscordAdapter.addUser: No se puedo añadir ${nick} al servidor: ${err}`);
         throw new Error(err);
       }
     }
@@ -544,16 +536,16 @@ class DiscordAdapter extends EventEmitter {
    * @param {Discord.UserResolvable} userResolvable Data that resolves to a User or GuildMember object.
    * @param {string} reason Reason for kicking user.
    */
-  async removeUser(userResolvable, reason = "Kicked by bot.") {
+  async removeUser(userResolvable, reason = "Kickeado por Login Bot.") {
     const guildMember = await this.resolveGuildMember(userResolvable);
 
     if (!guildMember) {
-      this.logWarning(`User ${userResolvable.id || userResolvable} not a member of the guild.`);
+      this.logWarning(`El usuario ${userResolvable.id || userResolvable} no es un miembro del servidor.`);
     } else {
       try {
         await guildMember.kick(reason);
       } catch (err) {
-        this.logError(`An error occured while removing ${guildMember.tag}: ${err}`);
+        this.logError(`Ocurrió un error kickeando a ${guildMember.tag}: ${err}`);
       }
     }
   }
@@ -567,7 +559,7 @@ class DiscordAdapter extends EventEmitter {
   async addRole(guildMemberResolvable, roleResolvable) {
     const guildMember = await this.resolveGuildMember(guildMemberResolvable);
     if (!guildMember) {
-      throw new Error(`User ${guildMemberResolvable.id || guildMemberResolvable} is not a member of the guild.`);
+      throw new Error(`User ${guildMemberResolvable.id || guildMemberResolvable} no es un miembro del servidor.`);
     }
 
     const guildRole = await this.resolveRole(roleResolvable);
