@@ -77,7 +77,7 @@ router.get("/", async (req, res) => {
   const flashMessages = req.flash("info")[0];
 
   res.render("users", {
-    pageTitle: "Users",
+    pageTitle: "Usuarios",
     numUsers,
     users,
     limit,

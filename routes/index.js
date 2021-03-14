@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
   }
 
   res.render("index", {
-    pageTitle: "Home",
+    pageTitle: "Inicio",
     ...flashMessages,
     welcomeChannelURL,
   });
