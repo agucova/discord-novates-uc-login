@@ -5,27 +5,20 @@
 
 module.exports = {
   // Prefix for bot commands.
-  prefix: "!",
+  prefix: "lo!",
   // Bot token (see: https://discord.com/developers/applications/)
   token: process.env.DISCORD_BOT_TOKEN,
   // The guild (or server) ID.
   guildId: process.env.DISCORD_SERVER_ID,
   // Channel to post welcome messages.
-  welcomeChannel: "welcome",
+  welcomeChannel: "👋｜bienvenida",
   // Channel to log messages to.
-  logChannel: "logs",
+  logChannel: "📃｜logs",
   // Default role for new members.
-  defaultRole: "student",
+  defaultRole: "Novate",
   // Reactions => roles
   roles: {
-    "1⃣": "y1",
-    "2⃣": "y2",
-    "3⃣": "y3",
-    "4⃣": "y4",
-    "🤖": "pr",
-    "🎨": "va",
-    "💭": "dp",
-    "🎓": "alumni",
-    "👍": "test",
+    "🎓": "Novate",
+    "👵": "Colade",
   },
 };

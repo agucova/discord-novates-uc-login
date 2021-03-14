@@ -9,27 +9,27 @@ block content
       .card.my-5.mx-auto.login(style="max-width:350px;")
         form.form-signin.text-center(action="/login" method="post")
           .card-body.text-center
-            h1.h3.mb-3.font-weight-normal Please sign in
-            .mb-3.mx-auto(style="max-width: 300px;")
+            h1.h3.mb-3.font-weight-normal Por favor inicia sesión
+            .mb-3.mx-auto(style="max-width: 600px;")
               a.btn.btn-primary.btn-lg.btn-block.btn-social.btn-google(role="button" href="/google") 
                 img(src="/images/g-logo.png" style="width: 48px;")
-                | Sign in with Google
-            .mb-3.mx-auto(style="max-width: 300px;")
-              a(href="/azure")
-                img(src="images/ms-symbollockup_signin_light.svg" style="width: 100%; min-width: 200px;")
+                | Mail UC
+            // .mb-3.mx-auto(style="max-width: 300px;")
+              // a(href="/azure")
+                // img(src="images/ms-symbollockup_signin_light.svg" style="width: 100%; min-width: 200px;")
 
             .division.mb-3
-              span.px-3 external login
+              span.px-3 login de mantenimiento
 
             .form-group
-              label.sr-only(for="username") Username
-              input.form-control#username(class=(usernameError && "is-invalid")  type="text" placeholder="Username" name="username" value=username required autofocus)
+              label.sr-only(for="username") Usuario
+              input.form-control#username(class=(usernameError && "is-invalid")  type="text" placeholder="Usuario" name="username" value=username required autofocus)
               if usernameError
                 .invalid-feedback= usernameError
             .form-group
-              label.sr-only(for="password") Password
-              input.form-control#password(class=(passwordError && "is-invalid") type="password" placeholder="Password" name="password" required)
+              label.sr-only(for="password") Contraseña
+              input.form-control#password(class=(passwordError && "is-invalid") type="password" placeholder="Contraseña" name="password" required)
               if passwordError
                 .invalid-feedback= passwordError
-            button.btn.btn-primary.btn-lg.btn-block(type="submit") Log in
+            button.btn.btn-primary.btn-lg.btn-block(type="submit") Iniciar sesión
 

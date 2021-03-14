@@ -1,6 +1,6 @@
 From: {{from}}
 To: {{name}} <{{email}}>
-Subject: You're invited to join our Discord server!💯
+Subject: Has sido invitade al Discord de Novates UC! 💯
 Content-Type: text/html; charset=utf-8
 
 <p>
@@ -8,12 +8,12 @@ Content-Type: text/html; charset=utf-8
 </p>
 
 <p>
-You have been invited to join our Discord server. Please link your Discord account using <a href="{{server}}" target=_blank>{{server}}</a>. Login with username <strong>{{email}}</strong> and password <strong>{{password}}</strong>.
+Has sido invitade al Discord de Novates UC. Por favor vincula tu cuenta de Discord usando <a href="{{server}}" target=_blank>{{server}}</a>. Inicia sesión con email <strong>{{email}}</strong> y contraseña <strong>{{password}}</strong>.
 </p>
 
 <p>
-Regards,
+Saludos,
 </p>
 <p>
-The Discord Administrator
+Equipo CS & FEUC
 </p>

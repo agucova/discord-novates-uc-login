@@ -4,8 +4,8 @@ block content
   main(role="main" style="padding-top: 86px;")
     section.jumbotron.jumbotron-fluid.text-center(style="padding: 60px 30px;")
       .container
-        h1.jumbotron-heading Discord User Manager
-        p.lead.text-muted The Discord User Manager allows you to manage the users that can join your discord server.
+        h1.jumbotron-heading Discord Novates UC
+        p.lead.text-muted Esta página te permite acceder por primera vez al Discord de Novates UC, verificando tu identidad con tu mail UC.
 
     //- Compute the current step.
     //- 1. The user hasn't accepted the code of conduct yet,
@@ -19,58 +19,58 @@ block content
           .card
             img.card-img-top(src="/images/code-of-conduct.png" alt="Code of Conduct Image")
             .card-body.d-flex.flex-column
-              h5.card-title Step 1
+              h5.card-title Paso 1
               if step > 1
-                p.card-text Great, you've accepted the Code of Conduct!
+                p.card-text Genial, aceptaste el código de conducta!
                 button.btn.btn-primary.btn-block.mt-auto(disabled type="button" aria-disabled="true") Code of Conduct
               else
-                p.card-text Accept the Code of Conduct.
-                button.btn.btn-primary.btn-block.mt-auto(type="button" data-toggle="modal" data-target="#codeOfConductModal") Code of Conduct
+                p.card-text Acepta el código de conducta.
+                button.btn.btn-primary.btn-block.mt-auto(type="button" data-toggle="modal" data-target="#codeOfConductModal") Código de Conducta
           .card(class= step < 2 && "text-muted")
             img.card-img-top(src= ( user && user.img ) || "/images/login.png" alt="User Image")
             .card-body.d-flex.flex-column
-              h5.card-title Step 2
+              h5.card-title Paso 2
               if step > 2
-                p.card-text Great, you're are logged in as 
+                p.card-text Perfecto, estás iniciado sesión como: 
                   strong #{user.name}
                   | !
-                a.btn.btn-primary.btn-block.mt-auto(href="/logout") Log out
+                a.btn.btn-primary.btn-block.mt-auto(href="/logout") Cerrar sesión
               else
-                p.card-text Log in using one of the OAuth providers.
-                a.btn.btn-primary.btn-block.mt-auto(role="button" href="/login" class= ( step < 2 && "disabled" ) ) Log in
+                p.card-text Verifica tu identidad con tu Mail UC.
+                a.btn.btn-primary.btn-block.mt-auto(role="button" href="/login" class= ( step < 2 && "disabled" ) ) Verificar
           .card(class= step < 3 && "text-muted")
             img.card-img-top(src= (user && user.discordAvatar ) || "/images/discord.png" alt="Discord Avatar")
             .card-body.d-flex.flex-column
-              h5.card-title Step 3
+              h5.card-title Paso 3
               if step > 3
-                p.card-text Great, you're logged in to Discord as 
+                p.card-text Perfecto, estás conectado a Discord como 
                   strong
                     a(href= welcomeChannelURL target="_blank")= `${user.discordUsername}#${user.discordDiscriminator}`
                 .mt-auto
-                  a.btn.btn-primary.btn-block(href= welcomeChannelURL target="_blank") Open Discord
-                  a.btn.btn-secondary.btn-block(href="/discord/logout") Unlink Discord
+                  a.btn.btn-primary.btn-block(href= welcomeChannelURL target="_blank") Abrir servidor
+                  a.btn.btn-secondary.btn-block(href="/discord/logout") Desvincular Discord
               else
-                p.card-text Log in to Discord.
-                a.btn.btn-primary.btn-block.mt-auto(href="/discord" class= ( step < 3 && "disabled")) Discord Log in
+                p.card-text Conecta tu Discord para acceder al servidor..
+                a.btn.btn-primary.btn-block.mt-auto(href="/discord" class= ( step < 3 && "disabled")) Vincular Discord
 
   .modal.fade#codeOfConductModal(tabindex="-1" role="dialog" aria-labelledby="codeOfConductModalTitle" aria-hidden="true")
     .modal-dialog(role="document")
       .modal-content
         .modal-header
-          h5.modal-title#codeOfConductModalTitle Code of Conduct
+          h5.modal-title#codeOfConductModalTitle Código de Conducta
           button.close(type="button" data-dismiss="modal" aria-label="Close")
             span(aria-hidden="true") &times;
         .modal-body
           include code-of-conduct-content.pug
         .modal-footer
-          a.btn.btn-success.btn-block(role="button" href="/?codeOfConduct=true") Agree
+          a.btn.btn-success.btn-block(role="button" href="/?codeOfConduct=true") Aceptar
 
   //- Discord login error alert.
   if ( discordLoginError )
     .alert.alert-danger.alert-top.alert-dismissible.fade.show#discordLoginErrorAlert(role="alert")
-      button.close(type="button" data-dismiss="alert" aria-label="Close")
+      button.close(type="button" data-dismiss="alert" aria-label="Cerrar")
         span(aria-hidden="true") &times;
-      h4.alert-heading Discord login error.
+      h4.alert-heading Error de vinculación con Discord.
       p= discordLoginError
 
   //- Privacy Policy alert.
@@ -82,7 +82,7 @@ block content
       p If you login to this website, your account information is stored in a database. The data collection is required for the functioning purpose of this website. 
         | By accepting the privacy policy, you agree to the collection of account information and the use of cookies.
         | For more information, please refer to the full 
-        a(href="/privacy-policy") Privacy Policy.
+        a(href="/privacy-policy") Política de Privacidad.
 
-      a.btn.btn-info(href="/?privacyPolicy=true" aria-label="Accept") Accept
+      a.btn.btn-info(href="/?privacyPolicy=true" aria-label="Accept") Aceptar
 
