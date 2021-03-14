@@ -45,7 +45,7 @@ router.get("/callback", (req, res, next) => {
       return res.redirect("/");
     }
 
-    debug("Discord user succeffully logged in.");
+    debug("Discord user succesffully logged in.");
     debug(profile);
 
     // Update the user's discordId and discordAvatar
@@ -68,7 +68,7 @@ router.get("/callback", (req, res, next) => {
         debug(`User ${profile.username} is banned: ${banReason}`);
 
         req.flash("info", {
-          errorAlert: `Could not connect to the Discord server because your account is banned: ${banReason}. Please contact the Discord owner for more information.`,
+          errorAlert: `No se pudo conectar al servidor de Discord porque tu cuenta está baneada: ${banReason}. Contacta a agucova@uc.cl para mas información.`,
         });
       }
     } catch (err) {
@@ -98,7 +98,7 @@ router.get("/logout", async (req, res) => {
 
   const user = req.user;
 
-  await DiscordAdapter.removeUser(user.discordId, "Unlinking Discord account.");
+  await DiscordAdapter.removeUser(user.discordId, "Desvinculando cuenta de Discord.");
 
   // Update user info.
   await user.update({

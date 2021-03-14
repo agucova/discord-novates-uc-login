@@ -41,7 +41,7 @@ router.get("/privacy-policy", (req, res) => {
   const flashMessages = req.flash("info")[0];
 
   res.render("privacy-policy", {
-    pageTitle: "Privacy Policy",
+    pageTitle: "Politica de Privacidad",
     ...flashMessages,
   });
 });
@@ -51,7 +51,7 @@ router.get("/code-of-conduct", (req, res) => {
   const flashMessages = req.flash("info")[0];
 
   res.render("code-of-conduct", {
-    pageTitle: "Code of Conduct",
+    pageTitle: "Reglas",
     ...flashMessages,
   });
 });

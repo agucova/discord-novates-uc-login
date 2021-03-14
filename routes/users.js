@@ -48,6 +48,11 @@ router.get("/", async (req, res) => {
             [SUBSTRING]: search,
           },
         },
+        {
+          discordUsername: {
+            [SUBSTRING]: search,
+          }
+        }
       ],
     };
   }
@@ -102,7 +107,7 @@ async function sendWelcomeMail(name, email, password, server) {
 
     if (valid) {
       let welcomeMessage = welcomeMessageTemplate;
-      welcomeMessage = welcomeMessage.replace(/{{from}}/g, `Discord User Manager <${transport.options.auth.user}>`);
+      welcomeMessage = welcomeMessage.replace(/{{from}}/g, `Login Discord Novates UC <${transport.options.auth.user}>`);
       welcomeMessage = welcomeMessage.replace(/{{name}}/g, name);
       welcomeMessage = welcomeMessage.replace(/{{email}}/g, email);
       welcomeMessage = welcomeMessage.replace(/{{password}}/g, password);

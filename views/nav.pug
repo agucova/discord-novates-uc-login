@@ -8,15 +8,15 @@ mixin navItem(href, name)
 
 header.fixed-top
   nav.navbar.navbar-expand-md.navbar-light.bg-light
-    a.navbar-brand(href="/") 
-      img(src="/images/brand_logo.svg" style="max-height: 60px;")
+    a.navbar-brand(href="/")
+      img(src="/images/logo-t.png" style="max-height: 60px;")
     button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation")
       span.navbar-toggler-icon
     .collapse.navbar-collapse#navbarCollapse
       ul.navbar-nav.mr-auto
         +navItem("/", "Inicio")
         +navItem("/privacy-policy", "Política de Privacidad")
-        +navItem("/code-of-conduct", "Código de Conducta")
+        +navItem("/code-of-conduct", "Reglas")
         if user && user.isAdmin
           +navItem("/users", "Usuarios")
       if codeOfConduct
@@ -24,12 +24,12 @@ header.fixed-top
           if user.isAdmin
             button.btn.btn-success.mr-2(
               role="button"
-              data-toggle="modal" 
+              data-toggle="modal"
               data-target="#addUserModal"
               data-placement="top"
             )
               i.fa.fa-plus
-              |  Add user
+              |  Añadir usuario
           a.btn.btn-primary(role="button" href="/logout") Cerrar sesión
         else
           a.btn.btn-primary(role="button" href="/login") Iniciar sesión
@@ -69,4 +69,4 @@ if user && user.isAdmin
             button.btn.btn-secondary(type="button" data-dismiss="modal") Cancelar
             button.btn.btn-success(type="submit")
               i.fa.fa-plus
-              |  Add
+              |  Añadir

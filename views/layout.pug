@@ -1,5 +1,5 @@
 doctype html
-html.h-100(lang="en")
+html.h-100(lang="es")
   head
     block head
       meta(charset="utf-8")
@@ -14,6 +14,7 @@ html.h-100(lang="en")
       link(rel="stylesheet" href="/css/footer.css")
       link(rel="stylesheet" href="/css/bootstrap-social.css")
       script(src="https://kit.fontawesome.com/cafa3cd001.js" crossorigin="anonymous")
+
   body.d-flex.flex-column.h-100
     include alerts.pug
     include nav.pug
@@ -25,3 +26,6 @@ html.h-100(lang="en")
       script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous")
       script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous")
       script(src="/scripts/app.js")
+      // Cloudflare Web Analytics
+      script(defer='' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "2ce2b17e1fed4e198a3c055d55ed7801"}')
+      // End Cloudflare Web Analytics

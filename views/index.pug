@@ -17,21 +17,21 @@ block content
       .container
         .card-deck
           .card
-            img.card-img-top(src="/images/code-of-conduct.png" alt="Code of Conduct Image")
+            img.card-img-top(src="/images/creglas.png" alt="Reglas")
             .card-body.d-flex.flex-column
               h5.card-title Paso 1
               if step > 1
-                p.card-text Genial, aceptaste el código de conducta!
-                button.btn.btn-primary.btn-block.mt-auto(disabled type="button" aria-disabled="true") Code of Conduct
+                p.card-text Genial, aceptaste las reglas!
+                button.btn.btn-primary.btn-block.mt-auto(disabled type="button" aria-disabled="true") Reglas
               else
-                p.card-text Acepta el código de conducta.
-                button.btn.btn-primary.btn-block.mt-auto(type="button" data-toggle="modal" data-target="#codeOfConductModal") Código de Conducta
+                p.card-text Acepta las reglas del servidor.
+                button.btn.btn-primary.btn-block.mt-auto(type="button" data-toggle="modal" data-target="#codeOfConductModal") Reglas
           .card(class= step < 2 && "text-muted")
-            img.card-img-top(src= ( user && user.img ) || "/images/login.png" alt="User Image")
+            img.card-img-top(src= ( user && user.img ) || "/images/cmailuc.png" alt="Imagen del usuario")
             .card-body.d-flex.flex-column
               h5.card-title Paso 2
               if step > 2
-                p.card-text Perfecto, estás iniciado sesión como: 
+                p.card-text Perfecto, estás iniciado sesión como 
                   strong #{user.name}
                   | !
                 a.btn.btn-primary.btn-block.mt-auto(href="/logout") Cerrar sesión
@@ -39,7 +39,7 @@ block content
                 p.card-text Verifica tu identidad con tu Mail UC.
                 a.btn.btn-primary.btn-block.mt-auto(role="button" href="/login" class= ( step < 2 && "disabled" ) ) Verificar
           .card(class= step < 3 && "text-muted")
-            img.card-img-top(src= (user && user.discordAvatar ) || "/images/discord.png" alt="Discord Avatar")
+            img.card-img-top(src= (user && user.discordAvatar ) || "/images/cdiscord.png" alt="Discord Avatar")
             .card-body.d-flex.flex-column
               h5.card-title Paso 3
               if step > 3
@@ -47,10 +47,10 @@ block content
                   strong
                     a(href= welcomeChannelURL target="_blank")= `${user.discordUsername}#${user.discordDiscriminator}`
                 .mt-auto
-                  a.btn.btn-primary.btn-block(href= welcomeChannelURL target="_blank") Abrir servidor
+                  a.btn.btn-primary.btn-block(href= welcomeChannelURL target="_blank") Entrar al servidor
                   a.btn.btn-secondary.btn-block(href="/discord/logout") Desvincular Discord
               else
-                p.card-text Conecta tu Discord para acceder al servidor..
+                p.card-text Conecta tu Discord para acceder al servidor.
                 a.btn.btn-primary.btn-block.mt-auto(href="/discord" class= ( step < 3 && "disabled")) Vincular Discord
 
   .modal.fade#codeOfConductModal(tabindex="-1" role="dialog" aria-labelledby="codeOfConductModalTitle" aria-hidden="true")
@@ -78,11 +78,10 @@ block content
     .alert.alert-info.alert-top.alert-dismissible.fade.show(role="alert")
       button.close(type="button" data-dismiss="alert" aria-label="Close")
         span(aria-hidden="true") &times;
-      h4.alert-heading Privacy Policy.
-      p If you login to this website, your account information is stored in a database. The data collection is required for the functioning purpose of this website. 
-        | By accepting the privacy policy, you agree to the collection of account information and the use of cookies.
-        | For more information, please refer to the full 
-        a(href="/privacy-policy") Política de Privacidad.
+      h4.alert-heading Política de Privacidad.
+      p Al usar esta web aceptas la política de privacidad.
+        |  Esto implica dar permiso para recolectar datos personales y cookies necesarios para el funcionamiento del sitio.
+        | Para mas información revisa la
+        a(href="/privacy-policy")  Política de Privacidad completa.
 
       a.btn.btn-info(href="/?privacyPolicy=true" aria-label="Accept") Aceptar
-

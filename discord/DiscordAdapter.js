@@ -81,11 +81,7 @@ class DiscordAdapter extends EventEmitter {
       this.client.reactions.set(reaction.name, reaction);
     }
 
-    this.logInfo(`
-    Platform    : ${process.platform}
-    Node version: ${process.version}`);
-
-    this.logInfo("Ready!");
+    this.logInfo("Inicializado!");
     // Emit the ready event (usefull for setup of test frameworks like Jest)
     this.emit("ready");
   }
@@ -209,7 +205,7 @@ class DiscordAdapter extends EventEmitter {
       this.client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 
     if (!command) {
-      return message.reply(`The ${commandName} command is not one of the recognized commands.`);
+      return message.reply(`El comando ${commandName} no fue reconocido.`);
     }
 
     // Check to see if this is a guild only command being executed outside of a guild.
@@ -221,7 +217,7 @@ class DiscordAdapter extends EventEmitter {
     if (command.permissions && message.guild) {
       const guildMember = message.guild.member(message.author);
       if (guildMember && !guildMember.hasPermission(command.permissions)) {
-        return message.reply("You do not have the required permissions to execute that command.");
+        return message.reply("No tienes permisos para ejecutar ese comando.");
       }
     }
 
@@ -241,8 +237,7 @@ class DiscordAdapter extends EventEmitter {
       if (now < expirationTime) {
         const timeLeft = ((expirationTime - now) / 1000).toFixed(1);
         return message.reply(
-          `Please wait ${timeLeft} more second${timeLeft !== 1.0 ? "s" : ""} before executing the ${
-            command.name
+          `Please wait ${timeLeft} more second${timeLeft !== 1.0 ? "s" : ""} before executing the ${command.name
           } command again.`
         );
       }
@@ -303,7 +298,7 @@ class DiscordAdapter extends EventEmitter {
       try {
         await reaction.message.fetch();
       } catch (err) {
-        this.logError(`An error occure while fetching partial message: ${err}`);
+        this.logError(`An error occured while fetching partial message: ${err}`);
         return;
       }
     }
@@ -324,7 +319,7 @@ class DiscordAdapter extends EventEmitter {
    * @param {Discord.GuildMember} guildMember
    */
   async onGuildMemberAdd(guildMember) {
-    this.logInfo(`${guildMember} has been added to the server.`);
+    this.logInfo(`${guildMember} fue añadido al servidor.`);
 
     const user = await User.findOne({
       where: {
@@ -340,7 +335,7 @@ class DiscordAdapter extends EventEmitter {
         this.logError(`An error occured while setting the nickname for ${user.name}: ${err}`);
       }
     } else {
-      this.logWarning(`${guildMember} was added to the server but was not found in the database.`);
+      this.logWarning(`${guildMember} fue añadido al servidor pero no está en la BBDD de verificación.`);
     }
   }
 
@@ -369,11 +364,11 @@ class DiscordAdapter extends EventEmitter {
   }
 
   async onGuildBanAdd(guild, user) {
-    await this.logInfo(`${user} was banned.`);
+    await this.logInfo(`${user} fue baneado`);
   }
 
   async onGuildBanRemove(guild, user) {
-    await this.logInfo(`${user} ban removed.`);
+    await this.logInfo(`Se revertió el ban de ${user}.`);
   }
 
   /**
@@ -495,13 +490,13 @@ class DiscordAdapter extends EventEmitter {
     if (guildMember) {
       try {
         await guildMember.setNickname(nickname);
-        this.logInfo(`Updated nickname for ${guildMember}`);
+        this.logInfo(`Alias actualizado para ${guildMember}`);
       } catch (err) {
-        this.logError(`Could not set nickname (${nickname}) for ${guildMember}: ${err}`);
+        this.logError(`No se pudo configurar el alias (${nickname}) para ${guildMember}: ${err}`);
         throw err;
       }
     } else {
-      this.logError(`Could not find ${userResolvable}`);
+      this.logError(`No se pudo encontrar ${userResolvable}`);
     }
   }
 
@@ -525,7 +520,7 @@ class DiscordAdapter extends EventEmitter {
     let guildMember = await this.resolveGuildMember(userResolvable);
 
     if (guildMember) {
-      this.logInfo(`User ${guildMember.user.tag} is already a member of the guild.`);
+      this.logInfo(`El usuario ${guildMember.user.tag} ya es miembro del servidor.`);
       // Just update the nickname.
       this.setNickname(userResolvable, nick);
     } else {
@@ -589,9 +584,9 @@ class DiscordAdapter extends EventEmitter {
 
     try {
       await guildMember.roles.add(guildRole.id);
-      await this.logInfo(`${guildMember} has been added to role ${guildRole}`);
+      await this.logInfo(`${guildMember} fue añadido al rol ${guildRole}`);
     } catch (err) {
-      this.logError(`An error occured while adding ${guildMember.nickname} to role ${guildRole.name}: ${err}`);
+      this.logError(`Un error ocurrió añadi9endo ${guildMember.nickname} al rol ${guildRole.name}: ${err}`);
     }
   }
 
@@ -614,7 +609,7 @@ class DiscordAdapter extends EventEmitter {
 
     try {
       await guildMember.roles.remove(guildRole.id);
-      await this.logInfo(`${guildMember} has been removed from role ${guildRole}`);
+      await this.logInfo(`${guildMember} fue removido del rol ${guildRole}`);
     } catch (err) {
       this.logError(`An error occured while removing the role ${guildRole} from ${guildMember}: ${err}`);
     }
