@@ -484,18 +484,11 @@ class DiscordAdapter extends EventEmitter {
    * Set the nickname of a guild user.
    * @param {Discord.UserResolvable|Discord.GuildMemberResolvable} userResolvable Data that resolves to a User or GuildMember object.
    * @param {string} nickname The nickname of the user.
+   * HARD DISABLE FOR NOVATES UC
    */
   async setNickname(userResolvable, nickname) {
     const guildMember = await this.resolveGuildMember(userResolvable);
-    if (guildMember) {
-      try {
-        await guildMember.setNickname(nickname);
-        this.logInfo(`Alias actualizado para ${guildMember}`);
-      } catch (err) {
-        this.logError(`No se pudo configurar el alias (${nickname}) para ${guildMember}: ${err}`);
-        throw err;
-      }
-    } else {
+    if (!guildMember) {
       this.logError(`No se pudo encontrar ${userResolvable}`);
     }
   }
